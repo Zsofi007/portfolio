@@ -55,14 +55,16 @@ export function SystemTechStackChips({ variant }: SystemTechStackChipsProps) {
   const ios = variant === 'ios';
   const sectionTitleClass = ios
     ? 'm-0 mt-3 text-[12px] font-semibold uppercase tracking-wide text-black/45'
-    : 'm-0 mt-3 text-base font-semibold text-black/70';
+    : 'm-0 mt-3 text-base font-semibold';
 
   return (
     <Suspense fallback={<ChipsSkeleton variant={variant} />}>
       <div aria-label="Technologies">
         {SYSTEM_TECH_GROUPS.map((g) => (
           <div key={g.title} className="first:mt-0">
-            <p className={sectionTitleClass}>{g.title}</p>
+            <p className={sectionTitleClass} style={ios ? undefined : { color: 'var(--ui-text-muted)' }}>
+              {g.title}
+            </p>
             <ul className="m-0 flex list-none flex-wrap gap-2 p-0" aria-label={`${g.title} technologies`}>
               {g.tags.map((t) => (
                 <ExpandableTechChip key={t} label={t} iconName={getTechStackIconName(t)} theme={theme} />

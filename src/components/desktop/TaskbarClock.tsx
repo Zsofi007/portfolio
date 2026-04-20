@@ -44,10 +44,12 @@ export function TaskbarClock() {
         aria-label="Clock"
         aria-expanded={open}
         aria-controls={open ? popoverId : undefined}
-        className={
-          'font-retro shrink-0 border-l-2 border-black/25 pl-2 text-right text-[1.35rem] leading-tight tabular-nums tracking-wide text-retro-ink ' +
-          'cursor-pointer outline-none hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black'
-        }
+        className="font-sans shrink-0 cursor-pointer rounded-md px-2 py-1 text-right text-[13px] leading-tight tabular-nums outline-none ui-pressable hover:bg-white/20 focus-visible:outline focus-visible:outline-2"
+        style={{
+          borderColor: 'var(--ui-border-soft)',
+          outlineColor: 'var(--ui-focus)',
+          color: 'var(--ui-text-muted)',
+        }}
         onClick={() => setOpen((v) => !v)}
       >
         <time dateTime={now.toISOString()}>

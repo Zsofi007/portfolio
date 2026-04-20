@@ -28,8 +28,8 @@ export function Tooltip({ content, children, placement = 'top', className }: Too
   const tooltipClassName = useMemo(() => {
     return (
       'pointer-events-none fixed z-[250] w-max max-w-[15rem] ' +
-      'rounded-sm border border-black/60 bg-[#ffffe8] px-2 py-1 font-retro text-base leading-tight text-retro-ink ' +
-      'shadow-[var(--ui-shadow-sm)]'
+      'rounded-xl border bg-[color:var(--ui-glass-strong)] px-2 py-1 font-retro text-base leading-tight ' +
+      'shadow-[var(--ui-shadow-sm)] backdrop-blur-[16px]'
     );
   }, []);
 
@@ -105,7 +105,11 @@ export function Tooltip({ content, children, placement = 'top', className }: Too
               id={id}
               role="tooltip"
               className={tooltipClassName}
-              style={pos ? { left: pos.left, top: pos.top } : { left: -9999, top: -9999 }}
+              style={
+                pos
+                  ? { left: pos.left, top: pos.top, borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)' }
+                  : { left: -9999, top: -9999, borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)' }
+              }
             >
               {content}
             </span>,

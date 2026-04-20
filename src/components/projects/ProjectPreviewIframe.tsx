@@ -39,8 +39,9 @@ export function ProjectPreviewIframe({ src, title, loadEnabled, variant = 'xp' }
       className={
         ios
           ? 'relative min-h-[12rem] flex-1 overflow-hidden rounded-2xl border border-black/[0.1] bg-zinc-100 shadow-inner'
-          : 'relative min-h-[12rem] flex-1 overflow-hidden border-2 border-black/25 bg-white'
+          : 'relative min-h-[12rem] flex-1 overflow-hidden rounded-2xl border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[12px]'
       }
+      style={ios ? undefined : { borderColor: 'var(--ui-border-soft)' }}
     >
       {(phase === 'idle' || phase === 'loading') && (
         <Skeleton className="absolute inset-2" aria-label="Loading project preview" />

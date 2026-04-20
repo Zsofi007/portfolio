@@ -105,9 +105,10 @@ export function CommandPalette() {
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
-        className="relative w-full max-w-xl overflow-hidden rounded-md border-2 border-black/40 bg-xp-panel/95 shadow-[var(--ui-shadow-lg)] backdrop-blur-[2px]"
+        className="relative w-full max-w-xl overflow-hidden rounded-2xl border bg-[color:var(--ui-glass-strong)] shadow-[var(--ui-shadow-lg)] backdrop-blur-[16px]"
+        style={{ borderColor: 'var(--ui-border-soft)' }}
       >
-        <div className="border-b-2 border-black/15 bg-white p-2">
+        <div className="border-b p-2" style={{ borderColor: 'var(--ui-border-soft)' }}>
           <input
             ref={inputRef}
             value={q}
@@ -116,7 +117,8 @@ export function CommandPalette() {
               setActiveIndex(0);
             }}
             onKeyDown={onKeyDown}
-            className="w-full rounded-sm border border-black/30 bg-white px-3 py-2 font-retro text-lg outline-none focus-visible:ring-2 focus-visible:ring-retro-titlebar-mid"
+            className="w-full rounded-xl border bg-white/70 px-3 py-2 font-retro text-lg outline-none focus-visible:ring-2"
+            style={{ borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)', boxShadow: 'none' }}
             placeholder="Type a command…"
             aria-controls="cmdp-list"
             aria-activedescendant={activeId}
@@ -135,14 +137,19 @@ export function CommandPalette() {
                   <button
                     type="button"
                     className={
-                      'flex w-full items-center gap-3 rounded-sm px-3 py-2 text-left font-retro text-lg outline-none ' +
-                      (selected ? 'bg-retro-titlebar-mid text-white' : 'hover:bg-black/5')
+                      'flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left font-retro text-lg outline-none ui-pressable ' +
+                      (selected ? 'bg-white/80' : 'hover:bg-white/30')
                     }
+                    style={{ color: selected ? 'var(--ui-text)' : 'var(--ui-text)' }}
                     onMouseEnter={() => setActiveIndex(i)}
                     onClick={() => act(it)}
                   >
                     <span aria-hidden className="flex h-7 w-7 items-center justify-center">
-                      <AppIconGlyph icon={it.icon} imgClassName="h-5 w-5 object-contain" textClassName={selected ? 'text-white' : 'text-retro-ink'} />
+                      <AppIconGlyph
+                        icon={it.icon}
+                        imgClassName="h-5 w-5 object-contain"
+                        textClassName={selected ? 'text-white' : 'text-retro-ink'}
+                      />
                     </span>
                     <span className="min-w-0 flex-1 truncate">{it.label}</span>
                   </button>

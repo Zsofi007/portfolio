@@ -54,26 +54,26 @@ export function ResumeApp({ variant = 'xp', loadPreview = true }: ResumeAppProps
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-auto bg-white p-4 font-retro text-retro-ink">
+    <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-auto p-4 font-sans" style={{ color: 'var(--ui-text)' }}>
       <header className="shrink-0">
-        <h2 className="font-pixel m-0 text-[0.55rem] text-retro-titlebar-mid">Resume.pdf</h2>
-        <p className="mt-2 text-lg leading-snug">
+        <p className="mt-2 text-[15px] leading-snug" style={{ color: 'var(--ui-text-muted)' }}>
           Summary: senior frontend engineer · React · TypeScript · product-minded delivery.
         </p>
       </header>
       <section
         aria-label="Resume preview"
-        className="flex min-h-0 flex-1 flex-col overflow-hidden rounded border-2 border-black/20 bg-zinc-100 shadow-inner"
+        className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[12px]"
+        style={{ borderColor: 'var(--ui-border-soft)' }}
       >
         {preview}
       </section>
-      <p className="m-0 shrink-0 font-pixel text-[0.42rem] leading-snug text-black/55">
+      <p className="m-0 shrink-0 text-[12px] leading-snug" style={{ color: 'var(--ui-text-muted)' }}>
         If the preview is blank, use Download — some browsers do not embed PDFs here.
       </p>
       <a
         href={RESUME_URL}
         download
-        className="font-pixel inline-flex w-fit shrink-0 border-2 border-black bg-xp-teal px-3 py-2 text-[0.5rem] text-white hover:bg-xp-teal-dark"
+        className="inline-flex w-fit shrink-0 cursor-pointer rounded-xl px-4 py-2 text-[13px] font-semibold no-underline ui-pressable ui-cta"
       >
         Download PDF
       </a>

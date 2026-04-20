@@ -12,36 +12,47 @@ export function FeaturedProject() {
     <aside
       data-desktop-obstacle="featured-project"
       className={
-        'pointer-events-auto absolute right-4 top-4 w-[22rem] rounded-sm border-2 border-black/35 bg-xp-panel/95 ' +
-        'shadow-[var(--ui-shadow-lg)] backdrop-blur-[2px]'
+        'pointer-events-auto absolute right-4 top-4 w-[22rem] rounded-2xl border bg-[color:var(--ui-glass-strong)] ' +
+        'shadow-[var(--ui-shadow-lg)] backdrop-blur-[16px]'
       }
+      style={{ borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)' }}
       aria-label="Featured project"
     >
-      <div className="flex items-center justify-between gap-2 border-b-2 border-black/15 bg-gradient-to-b from-white/80 to-white/35 px-3 py-2">
+      <div
+        className="flex items-center justify-between gap-2 border-b px-4 py-3"
+        style={{ borderColor: 'var(--ui-border-soft)' }}
+      >
         <div className="flex min-w-0 items-center gap-2">
           <span aria-hidden className="flex h-8 w-8 items-center justify-center">
             <AppIconGlyph icon={featured.icon} imgClassName="h-7 w-7 object-contain" textClassName="text-xl" />
           </span>
           <div className="min-w-0">
-            <div className="truncate font-retro text-lg leading-tight text-retro-ink">Featured</div>
-            <div className="truncate font-retro text-base leading-tight text-neutral-700">{featured.name}</div>
+            <div className="truncate font-pixel text-[0.55rem] leading-snug tracking-tight" style={{ color: 'var(--ui-text-muted)' }}>
+              Featured
+            </div>
+            <div className="truncate font-sans text-[15px] font-semibold leading-tight" style={{ color: 'var(--ui-text)' }}>
+              {featured.name}
+            </div>
           </div>
         </div>
         <span
           aria-label="New"
-          className="shrink-0 rounded-full bg-[#fff7b0] px-2 py-0.5 font-retro text-base font-semibold text-black/75"
+          className="shrink-0 rounded-full px-2 py-0.5 font-sans text-[12px] font-semibold"
+          style={{ background: 'var(--ui-glass-tint)', color: 'var(--ui-text)' }}
         >
           New
         </span>
       </div>
 
-      <div className="px-3 py-3">
-        <div className="text-base leading-snug text-neutral-800 line-clamp-3">{featured.description}</div>
+      <div className="px-4 py-3">
+        <div className="text-base leading-snug line-clamp-3" style={{ color: 'var(--ui-text-muted)' }}>
+          {featured.description}
+        </div>
 
         <div className="mt-3 flex items-center justify-end gap-2">
           <button
             type="button"
-            className="cursor-pointer border-2 border-black/30 bg-white px-3 py-1.5 font-retro text-lg text-retro-ink ui-pressable hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
+            className="cursor-pointer rounded-xl px-3 py-2 font-sans text-[13px] font-semibold ui-pressable ui-cta"
             onClick={() => openApp(featured.id)}
             aria-label={`Open featured project: ${featured.name}`}
           >
@@ -50,7 +61,7 @@ export function FeaturedProject() {
         </div>
       </div>
 
-      <div className="h-1 w-full bg-gradient-to-r from-retro-titlebar-mid/60 via-retro-titlebar-deep/35 to-transparent" aria-hidden />
+      <div className="h-px w-full" style={{ background: 'var(--ui-border-soft)' }} aria-hidden />
     </aside>
   );
 }

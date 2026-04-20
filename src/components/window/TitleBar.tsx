@@ -16,14 +16,16 @@ export function TitleBar({ titleId, title, dragProps, controls }: TitleBarProps)
   return (
     <div
       className={
-        'flex cursor-default select-none items-center gap-2 border-b-2 border-black ' +
-        'bg-gradient-to-b from-retro-titlebar-mid to-retro-titlebar-deep px-2 py-2'
+        'flex cursor-default select-none items-center gap-2 border-b px-3 py-2 ' +
+        'bg-[linear-gradient(180deg,var(--ui-glass-tint),transparent)]'
       }
+      style={{ borderColor: 'var(--ui-border-soft)' }}
     >
       <div className="min-w-0 flex-1" {...dragProps}>
         <span
           id={titleId}
-          className="font-pixel block truncate text-[0.55rem] leading-snug tracking-tight text-white"
+          className="font-pixel block truncate text-[0.55rem] leading-snug tracking-tight"
+          style={{ color: 'var(--ui-text)' }}
         >
           {title}
         </span>

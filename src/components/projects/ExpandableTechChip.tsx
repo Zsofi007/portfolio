@@ -1,6 +1,7 @@
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { resolveTheme, useThemeStore } from '@/store/themeStore';
 import type { IconName } from 'tech-stack-icons';
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect, useMemo, useState } from 'react';
 
 const StackIcon = lazy(() => import('tech-stack-icons'));
 
@@ -18,23 +19,24 @@ const themes: Record<
 > = {
   iframe: {
     btn:
-      'h-9 min-h-9 min-w-9 max-w-9 rounded border border-black/25 bg-xp-panel/95 text-retro-ink shadow-sm backdrop-blur-sm ' +
+      'h-9 min-h-9 min-w-9 max-w-9 rounded-md border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[10px] ' +
       'md:hover:max-w-[min(220px,42vw)] md:hover:gap-2 md:hover:px-2 md:hover:shadow-md ' +
       'md:focus-within:max-w-[min(220px,42vw)] md:focus-within:gap-2 md:focus-within:px-2 md:focus-within:shadow-md',
     btnTextOnly:
-      'h-9 min-h-9 min-w-9 max-w-9 rounded border border-black/25 bg-xp-panel/95 text-retro-ink shadow-sm backdrop-blur-sm',
-    label: 'font-pixel text-[0.45rem] leading-tight text-retro-ink',
+      'h-9 min-h-9 min-w-9 max-w-9 rounded-md border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[10px]',
+    label: 'font-sans text-[12px] font-medium leading-tight',
     iconBox: 'flex h-7 w-7 shrink-0 items-center justify-center',
-    fallback: 'font-pixel max-w-[2.2rem] truncate text-center text-[0.35rem] leading-tight text-retro-titlebar-mid',
+    fallback: 'font-sans max-w-[2.2rem] truncate text-center text-[10px] font-semibold leading-tight',
     iconClass: 'h-5 w-5 shrink-0',
   },
   systemXp: {
     btn:
-      'h-10 min-h-10 min-w-10 max-w-10 rounded border-2 border-black/25 bg-xp-panel shadow-sm ' +
+      'h-10 min-h-10 min-w-10 max-w-10 rounded-2xl border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[12px] ' +
       'md:hover:max-w-[min(240px,40vw)] md:hover:gap-2 md:hover:px-2.5 md:hover:shadow-md ' +
       'md:focus-within:max-w-[min(240px,40vw)] md:focus-within:gap-2 md:focus-within:px-2.5 md:focus-within:shadow-md',
-    btnTextOnly: 'h-10 min-h-10 min-w-10 max-w-10 rounded border-2 border-black/25 bg-xp-panel shadow-sm',
-    label: 'font-retro text-base font-medium leading-tight text-retro-ink',
+    btnTextOnly:
+      'h-10 min-h-10 min-w-10 max-w-10 rounded-2xl border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[12px]',
+    label: 'font-sans text-[13px] font-medium leading-tight',
     iconBox: 'flex h-8 w-8 shrink-0 items-center justify-center',
     fallback: 'font-pixel max-w-[3rem] truncate text-center text-[0.35rem] leading-tight text-retro-titlebar-mid',
     iconClass: 'h-6 w-6 shrink-0',
@@ -58,6 +60,8 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [open, setOpen] = useState(false);
   const expandedMobile = isMobile && open;
+  const themeMode = useThemeStore((s) => s.mode);
+  const resolved = useMemo(() => resolveTheme(themeMode), [themeMode]);
 
   useEffect(() => {
     if (!isMobile) setOpen(false);
@@ -65,7 +69,7 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
 
   const ring =
     theme === 'iframe'
-      ? 'focus-visible:ring-black'
+      ? 'focus-visible:ring-[color:var(--ui-focus)]'
       : theme === 'systemIos'
         ? 'focus-visible:ring-[#007aff]'
         : 'focus-visible:ring-retro-titlebar-mid';
@@ -77,10 +81,17 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
           className={
             'flex cursor-default items-center justify-center overflow-hidden px-1.5 ' + t.btnTextOnly
           }
+          style={
+            theme === 'systemXp' || theme === 'iframe'
+              ? { borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)', outlineColor: 'var(--ui-focus)' }
+              : undefined
+          }
           aria-label={label}
         >
           <span className={t.iconBox}>
-            <span className={t.fallback}>{label}</span>
+            <span className={t.fallback} style={theme === 'iframe' ? { color: 'var(--ui-text-muted)' } : undefined}>
+              {label}
+            </span>
           </span>
         </div>
       </li>
@@ -101,6 +112,11 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
           t.btn +
           (expandedMobile ? ' max-md:max-w-[min(260px,85vw)] max-md:justify-start max-md:gap-2 max-md:px-2.5' : '')
         }
+        style={
+          theme === 'systemXp' || theme === 'iframe'
+            ? { borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)', outlineColor: 'var(--ui-focus)' }
+            : undefined
+        }
         aria-expanded={isMobile ? open : undefined}
         aria-label={label}
         onClick={() => {
@@ -109,7 +125,12 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
         }}
       >
         <span className={t.iconBox}>
-          <StackIcon name={iconName} variant="light" className={t.iconClass} aria-hidden />
+          <StackIcon
+            name={iconName}
+            variant={resolved === 'dark' ? 'dark' : 'light'}
+            className={t.iconClass}
+            aria-hidden
+          />
         </span>
         <span
           className={

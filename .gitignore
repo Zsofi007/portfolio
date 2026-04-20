@@ -4,6 +4,7 @@ node_modules
 .cursor/
 .claude-flow/
 .env
+dist/
 
 # Source pack (subset copied to public/xp-icons); omit from git to save ~155MB
 Windows XP Icons/

@@ -3,9 +3,8 @@ import { HiArrowTopRightOnSquare } from 'react-icons/hi2';
 import type { AppChromeVariant } from '@/types/app-chrome';
 
 const btnXp =
-  'flex h-9 w-9 items-center justify-center border-2 border-black/40 bg-xp-panel text-retro-ink ' +
-  'transition hover:bg-white hover:text-retro-titlebar-mid focus-visible:outline focus-visible:outline-2 ' +
-  'focus-visible:outline-black';
+  'flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border bg-white/40 ui-pressable ' +
+  'hover:bg-white/55 focus-visible:outline focus-visible:outline-2';
 
 const btnIos =
   'flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.08] bg-white/95 text-black ' +
@@ -31,6 +30,11 @@ export function IframeCornerActions({ repoUrl, fullAppUrl, variant = 'xp' }: Ifr
         target="_blank"
         rel="noreferrer noopener"
         className={btn}
+        style={
+          variant === 'ios'
+            ? undefined
+            : { borderColor: 'var(--ui-border-soft)', outlineColor: 'var(--ui-focus)', color: 'var(--ui-text)' }
+        }
         aria-label="View source on GitHub"
       >
         <FaGithub className="h-5 w-5" aria-hidden />
@@ -40,6 +44,11 @@ export function IframeCornerActions({ repoUrl, fullAppUrl, variant = 'xp' }: Ifr
         target="_blank"
         rel="noreferrer noopener"
         className={btn}
+        style={
+          variant === 'ios'
+            ? undefined
+            : { borderColor: 'var(--ui-border-soft)', outlineColor: 'var(--ui-focus)', color: 'var(--ui-text)' }
+        }
         aria-label="Open full app in a new tab"
       >
         <HiArrowTopRightOnSquare className="h-5 w-5" aria-hidden />

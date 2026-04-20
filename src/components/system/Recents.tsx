@@ -24,11 +24,12 @@ export function Recents({ max = 5 }: RecentsProps) {
           <button
             key={id}
             type="button"
-            className="flex h-8 w-8 items-center justify-center border-2 border-black/30 bg-xp-panel outline-none hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border bg-white/40 ui-pressable outline-none hover:bg-white/55 focus-visible:outline focus-visible:outline-2"
+            style={{ borderColor: 'var(--ui-border-soft)', outlineColor: 'var(--ui-focus)', color: 'var(--ui-text)' }}
             aria-label={`Open recent: ${label}`}
             onClick={() => openApp(id)}
           >
-            <AppIconGlyph icon={icon} imgClassName="h-5 w-5 object-contain" textClassName="text-base font-bold" />
+            <AppIconGlyph icon={icon} imgClassName="h-6 w-6 object-contain" textClassName="text-base font-bold" />
           </button>
         );
       })}

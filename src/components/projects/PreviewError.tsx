@@ -9,7 +9,8 @@ export function PreviewError({ onRetry }: PreviewErrorProps) {
       <p className="m-0 text-sm text-amber-950">Preview could not be loaded (timeout or blocked).</p>
       <button
         type="button"
-        className="rounded-lg bg-xp-teal px-3 py-1.5 text-xs font-medium text-white hover:bg-xp-teal-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-xp-title"
+        className="cursor-pointer rounded-lg border bg-[color:var(--ui-cta-bg)] px-3 py-1.5 text-xs font-semibold ui-pressable hover:bg-[color:var(--ui-cta-bg-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--ui-focus)]"
+        style={{ borderColor: 'var(--ui-border-soft)', color: 'var(--ui-cta-text)' }}
         onClick={onRetry}
       >
         Retry

@@ -50,9 +50,14 @@ export function AboutTxtApp({ variant = 'xp' }: AboutTxtAppProps) {
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col bg-[#ffffe8] font-mono text-sm text-black">
-      <pre className="m-0 min-h-0 flex-1 overflow-auto whitespace-pre-wrap p-3 leading-relaxed">{DOC}</pre>
-      <div className="shrink-0 border-t-2 border-black/15 bg-[#ece9d8] px-3 py-2">
+    <div
+      className="flex min-h-0 flex-1 flex-col bg-[color:var(--ui-glass)] font-sans"
+      style={{ color: 'var(--ui-text)' }}
+    >
+      <pre className="m-0 min-h-0 flex-1 overflow-auto whitespace-pre-wrap px-4 py-3 font-mono text-[13px] leading-relaxed">
+        {DOC}
+      </pre>
+      <div className="shrink-0 border-t px-4 py-3" style={{ borderColor: 'var(--ui-border-soft)' }}>
         <NextStepLink variant="xp" visible={guided} ariaLabel="Open Projects folder" onActivate={openProjects}>
           Next: explore my Projects
         </NextStepLink>

@@ -66,8 +66,10 @@ export const WindowFrame = memo(function WindowFrame({ windowId, zIndex, isActiv
       animate={reducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
       exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 14, scale: 0.98 }}
       transition={reducedMotion ? { duration: 0.1 } : { duration: 0.16, ease: 'easeOut' }}
-      className={`pointer-events-auto ${positionClass} flex flex-col overflow-hidden rounded-none border-2 border-[#5a5a5a] bg-xp-panel outline-none ${
-        isActive ? 'ring-2 ring-black' : 'ring-1 ring-black/50'
+      className={`pointer-events-auto ${positionClass} flex flex-col overflow-hidden rounded-xl border backdrop-blur-[14px] outline-none ${
+        isActive
+          ? 'border-[var(--ui-border-hard)] bg-[color:var(--ui-glass-strong)] shadow-[var(--ui-shadow-lg)]'
+          : 'border-[var(--ui-border-soft)] bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-md)]'
       }`}
       style={style}
       onPointerDown={() => focusWindow(windowId)}
@@ -87,7 +89,8 @@ export const WindowFrame = memo(function WindowFrame({ windowId, zIndex, isActiv
         }
       />
       <div
-        className="flex min-h-0 flex-1 flex-col overflow-hidden border-t-2 border-black/15 text-sm text-retro-ink"
+        className="flex min-h-0 flex-1 flex-col overflow-hidden border-t text-sm"
+        style={{ borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)' }}
         inert={!isActive ? true : undefined}
       >
         <WindowContentRouter windowId={windowId} appId={effectiveW.appId} loadPreview={isActive} />

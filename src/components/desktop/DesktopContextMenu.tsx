@@ -5,8 +5,8 @@ import { useWallpaperStore } from '@/store/wallpaperStore';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const item =
-  'block w-full cursor-default border-0 bg-transparent px-3 py-2 text-left font-retro text-lg text-retro-ink ' +
-  'hover:bg-xp-teal hover:text-white focus-visible:bg-xp-teal focus-visible:text-white focus-visible:outline-none';
+  'block w-full cursor-pointer border-0 bg-transparent px-3 py-2 text-left font-retro text-lg outline-none ui-pressable ' +
+  'hover:bg-white/25 focus-visible:bg-white/25 focus-visible:outline-none';
 
 export function DesktopContextMenu() {
   const menu = useShellUiStore((s) => s.contextMenu);
@@ -74,8 +74,8 @@ export function DesktopContextMenu() {
         role="menu"
         aria-label="Desktop actions"
         tabIndex={-1}
-        className="fixed z-[200] min-w-[12rem] border-2 border-black bg-xp-panel/95 py-1 shadow-[var(--ui-shadow-md)] backdrop-blur-[2px]"
-        style={{ left: menu.x, top: menu.y }}
+        className="fixed z-[200] min-w-[12rem] rounded-xl border bg-[color:var(--ui-glass-strong)] py-1 shadow-[var(--ui-shadow-md)] backdrop-blur-[16px]"
+        style={{ left: menu.x, top: menu.y, borderColor: 'var(--ui-border-soft)' }}
         onKeyDown={(e) => {
           if (e.key === 'Escape') {
             e.preventDefault();
@@ -113,6 +113,7 @@ export function DesktopContextMenu() {
             role="menuitem"
             tabIndex={idx === activeIndex ? 0 : -1}
             className={item}
+            style={{ color: 'var(--ui-text)' }}
             onMouseEnter={() => setActiveIndex(idx)}
             onClick={() => run(a.onSelect)}
           >

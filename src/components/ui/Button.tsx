@@ -9,11 +9,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   ref,
 ) {
   const base =
-    'font-pixel inline-flex items-center justify-center border-2 border-black bg-xp-teal px-5 py-3 ' +
-    'text-[0.55rem] leading-tight tracking-tight text-white [box-shadow:2px_2px_0_#000] cursor-pointer ui-pressable ' +
-    'hover:bg-xp-teal-dark hover:[box-shadow:1px_1px_0_#000] active:translate-x-px active:translate-y-px ' +
-    'active:[box-shadow:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ' +
-    'focus-visible:outline-[#7cfcb0] disabled:opacity-50';
+    'inline-flex items-center justify-center rounded-xl border border-[color:var(--ui-border-soft)] px-5 py-3 font-sans text-[13px] font-semibold ' +
+    'cursor-pointer ui-pressable outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ui-focus)] disabled:opacity-50 ' +
+    'bg-[color:var(--ui-cta-bg)] hover:bg-[color:var(--ui-cta-bg-hover)] text-[color:var(--ui-cta-text)]';
   return (
     <button ref={ref} type={type} className={`${base} ${className}`.trim()} {...rest}>
       {children}

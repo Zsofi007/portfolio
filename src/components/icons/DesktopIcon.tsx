@@ -54,12 +54,11 @@ export function DesktopIcon({ app, visualWeight = 'default', spotlight = false }
       type="button"
       data-desktop-icon={app.id}
       aria-label={ariaLabel}
-      style={{ width: DESKTOP_ICON_LAYOUT_W, height: DESKTOP_ICON_LAYOUT_H }}
+      style={{ width: DESKTOP_ICON_LAYOUT_W, height: DESKTOP_ICON_LAYOUT_H, outlineColor: 'var(--ui-focus)' }}
       className={
-        'font-retro flex flex-col items-center justify-center gap-1 rounded-lg border-0 p-2 text-center ' +
-        'outline-none transition hover:bg-white/15 hover:backdrop-blur-sm focus-visible:bg-white/15 focus-visible:backdrop-blur-sm ' +
-        'focus-visible:ring-2 focus-visible:ring-white ' +
-        'focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ' +
+        'font-retro flex flex-col items-center justify-center gap-1 rounded-2xl border border-transparent p-2 text-center ui-pressable ' +
+        'outline-none hover:bg-white/18 hover:backdrop-blur-sm focus-visible:bg-white/18 focus-visible:backdrop-blur-sm ' +
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ' +
         weightClass[visualWeight] +
         (spotlight ? ' guided-desktop-icon-spotlight' : '') +
         (projectsEmphasisClass ? ` ${projectsEmphasisClass}` : '') +
@@ -81,7 +80,7 @@ export function DesktopIcon({ app, visualWeight = 'default', spotlight = false }
           textClassName="text-2xl text-retro-titlebar-mid"
         />
       </span>
-      <span className="max-w-full truncate text-lg font-normal leading-tight text-white drop-shadow-[0_1px_3px_rgb(0_0_0/0.9)]">
+      <span className="max-w-full truncate text-lg font-normal leading-tight text-white drop-shadow-[0_2px_10px_rgb(0_0_0/0.65)]">
         {app.label}
       </span>
     </button>

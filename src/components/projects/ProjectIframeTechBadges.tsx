@@ -15,7 +15,8 @@ function TechBadgesSkeleton({ techStack }: ProjectIframeTechBadgesProps) {
       {techStack.map((t) => (
         <li
           key={t}
-          className="flex h-9 min-w-9 max-w-9 list-none items-center justify-center rounded border border-black/25 bg-xp-panel/80"
+          className="flex h-9 min-w-9 max-w-9 list-none items-center justify-center rounded border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[10px]"
+          style={{ borderColor: 'var(--ui-border-soft)' }}
           aria-hidden
         >
           <span className="block h-4 w-4 rounded bg-black/15" />

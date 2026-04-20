@@ -38,17 +38,56 @@
   --ui-surface-veil-strong: rgb(255 255 255 / 0.9);
 }
 
+/* Theme is controlled via `data-theme` on <html>. */
 :root {
   color-scheme: light;
+}
+
+:root[data-theme='light'] {
+  --ui-focus: rgb(124 252 176 / 0.9);
+  --ui-glass: rgb(255 255 255 / 0.72);
+  --ui-glass-strong: rgb(255 255 255 / 0.86);
+  --ui-glass-tint: rgb(36 94 220 / 0.08);
+  --ui-cta-bg: rgb(241 133 63 / 0.96);
+  --ui-cta-bg-hover: rgb(224 114 44 / 0.98);
+  --ui-cta-text: rgb(255 255 255 / 0.98);
+  --ui-text: rgb(13 14 18 / 0.92);
+  --ui-text-muted: rgb(13 14 18 / 0.64);
+  --ui-border-soft: rgb(0 0 0 / 0.14);
+  --ui-border-hard: rgb(0 0 0 / 0.26);
+  --ui-shadow-sm: 0 6px 18px rgb(0 0 0 / 0.16);
+  --ui-shadow-md: 0 14px 38px rgb(0 0 0 / 0.22);
+  --ui-shadow-lg: 0 24px 66px rgb(0 0 0 / 0.28);
+}
+
+:root[data-theme='dark'] {
+  --ui-focus: rgb(154 230 255 / 0.92);
+  --ui-glass: rgb(18 18 22 / 0.66);
+  --ui-glass-strong: rgb(18 18 22 / 0.82);
+  --ui-glass-tint: rgb(124 252 176 / 0.08);
+  --ui-cta-bg: rgb(255 162 92 / 0.88);
+  --ui-cta-bg-hover: rgb(255 178 120 / 0.96);
+  --ui-cta-text: rgb(255 255 255 / 0.98);
+  --ui-text: rgb(255 255 255 / 0.92);
+  --ui-text-muted: rgb(255 255 255 / 0.64);
+  --ui-border-soft: rgb(255 255 255 / 0.14);
+  --ui-border-hard: rgb(255 255 255 / 0.22);
+  --ui-shadow-sm: 0 10px 26px rgb(0 0 0 / 0.55);
+  --ui-shadow-md: 0 18px 52px rgb(0 0 0 / 0.62);
+  --ui-shadow-lg: 0 28px 80px rgb(0 0 0 / 0.68);
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
-  font-family: var(--font-retro);
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: var(--ui-text);
 }
 
 /* Modernized interactive feel (retro-safe). */
@@ -64,12 +103,40 @@ body {
     background-color var(--dur-ui-fast) var(--ease-ui);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .ui-pressable:hover {
+    transform: translateY(-1px) scale(1.01);
+    filter: brightness(1.06) saturate(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-pressable:hover {
+    filter: brightness(1.06) saturate(1.03);
+  }
+}
+
 .ui-pressable:active {
   transform: translate(1px, 1px);
   filter: saturate(1.03);
 }
 
 .ui-focus-ring:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+.ui-cta {
+  border: 1px solid var(--ui-border-soft);
+  background: var(--ui-cta-bg);
+  color: var(--ui-cta-text);
+}
+
+.ui-cta:hover {
+  background: var(--ui-cta-bg-hover);
+}
+
+.ui-cta:focus-visible {
   outline: 2px solid var(--ui-focus);
   outline-offset: 2px;
 }

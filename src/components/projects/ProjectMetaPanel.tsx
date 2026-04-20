@@ -7,7 +7,7 @@ import type { Project } from '@/data/projects';
 type ProjectMetaPanelProps = { project: Project; variant?: AppChromeVariant };
 
 export function ProjectMetaPanel(props: ProjectMetaPanelProps) {
-  const { variant = 'xp' } = props;
+  const { project, variant = 'xp' } = props;
   const ios = variant === 'ios';
   const guided = useGuidancePrefsStore((s) => s.guidedMode);
   const onContact = () => openDesktopApp('contact');
@@ -31,10 +31,15 @@ export function ProjectMetaPanel(props: ProjectMetaPanelProps) {
   }
 
   return (
-    <header className="shrink-0 space-y-2 border-b-2 border-black/15 bg-xp-panel/95 px-3 pb-3 pt-2">
-      {/* <h2 className="font-pixel m-0 text-[0.55rem] text-retro-titlebar-mid">{project.name}</h2> */}
-      {/* <p className="m-0 font-retro text-lg leading-snug text-retro-ink">{project.description}</p>
-      <ProjectMetaTechStrip techStack={project.techStack} variant="xp" /> */}
+    <header
+      className="shrink-0 border-b px-4 pb-3 pt-3"
+      style={{ borderColor: 'var(--ui-border-soft)', background: 'var(--ui-glass)' }}
+    >
+      <div className="space-y-1.5">
+        <p className="m-0 font-sans text-[13px] leading-snug" style={{ color: 'var(--ui-text-muted)' }}>
+          {project.description}
+        </p>
+      </div>
       <NextStepLink
         variant="xp"
         visible={guided}

@@ -46,13 +46,16 @@ export function ContactExeForm({ variant = 'xp' }: ContactExeFormProps) {
       <div
         role="status"
         aria-live="polite"
-        className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 p-6 font-retro text-retro-ink"
+        className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 p-6 font-sans"
+        style={{ color: 'var(--ui-text)' }}
       >
         <p className="m-0 text-2xl">Thanks, {name}.</p>
-        <p className="m-0 text-lg text-black/70">Message received. I’ll probably reply faster than a recruiter.</p>
+        <p className="m-0 text-[15px]" style={{ color: 'var(--ui-text-muted)' }}>
+          Message received. I’ll probably reply faster than a recruiter.
+        </p>
         <button
           type="button"
-          className="border-2 border-black bg-xp-panel px-3 py-1 text-lg hover:bg-white"
+          className="ui-cta cursor-pointer rounded-xl border bg-white/55 px-4 py-2 text-[13px] font-semibold ui-pressable hover:bg-white/75 focus-visible:outline focus-visible:outline-2"
           onClick={() => {
             setSent(false);
             setName('');
@@ -93,33 +96,38 @@ export function ContactExeForm({ variant = 'xp' }: ContactExeFormProps) {
   return (
     <form
       onSubmit={submit}
-      className="flex min-h-0 flex-1 flex-col gap-3 overflow-auto p-4 font-retro text-retro-ink"
+      className="flex min-h-0 flex-1 flex-col gap-3 overflow-auto p-4 font-sans"
+      style={{ color: 'var(--ui-text)' }}
     >
-      <h2 className="font-pixel m-0 text-[0.55rem] text-retro-titlebar-mid">Contact.exe</h2>
-      <label className="flex flex-col gap-1 text-lg">
+      <label className="flex flex-col gap-1 text-[13px] font-semibold" style={{ color: 'var(--ui-text-muted)' }}>
         Name
         <input
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border-2 border-black/30 bg-white px-2 py-1 text-lg outline-none focus:border-black"
+          className="rounded-xl border bg-white/65 px-3 py-2 text-[15px] outline-none focus-visible:outline focus-visible:outline-2"
+          style={{ borderColor: 'var(--ui-border-soft)', outlineColor: 'var(--ui-focus)', color: 'var(--ui-text)' }}
         />
       </label>
-      <label className="flex min-h-0 flex-1 flex-col gap-1 text-lg">
+      <label
+        className="flex min-h-0 flex-1 flex-col gap-1 text-[13px] font-semibold"
+        style={{ color: 'var(--ui-text-muted)' }}
+      >
         Message
         <textarea
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={6}
-          className="min-h-0 flex-1 resize-none border-2 border-black/30 bg-white px-2 py-1 text-lg outline-none focus:border-black"
+          className="min-h-0 flex-1 resize-none rounded-xl border bg-white/65 px-3 py-2 text-[15px] outline-none focus-visible:outline focus-visible:outline-2"
+          style={{ borderColor: 'var(--ui-border-soft)', outlineColor: 'var(--ui-focus)', color: 'var(--ui-text)' }}
         />
       </label>
       <button
         type="submit"
-        className="font-pixel w-fit border-2 border-black bg-xp-teal px-4 py-2 text-[0.5rem] text-white hover:bg-xp-teal-dark"
-      >
-        Submit
+        className="mt-1 w-fit cursor-pointer rounded-xl border bg-white/60 px-4 py-2 text-[13px] font-semibold ui-pressable hover:bg-white/75 focus-visible:outline focus-visible:outline-2 ui-cta"
+       >
+        Send
       </button>
     </form>
   );

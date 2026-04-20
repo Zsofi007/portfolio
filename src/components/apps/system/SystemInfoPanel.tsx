@@ -79,31 +79,38 @@ export function SystemInfoPanel({ variant = 'xp' }: SystemInfoPanelProps) {
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto p-4 font-retro text-retro-ink">
-      <h2 className="font-pixel m-0 text-[0.55rem] text-retro-titlebar-mid">System</h2>
-      <dl className="m-0 grid gap-2 text-lg">
+    <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto p-4 font-sans">
+      <dl className="m-0 grid gap-2 text-[15px]" style={{ color: 'var(--ui-text)' }}>
         {LINES.map(({ k, v }) => (
-          <div key={k} className="grid grid-cols-[8rem_1fr] gap-2 border-b border-black/10 pb-2">
-            <dt className="m-0 font-semibold">{k}</dt>
+          <div key={k} className="grid grid-cols-[8rem_1fr] gap-2 border-b pb-2" style={{ borderColor: 'var(--ui-border-soft)' }}>
+            <dt className="m-0 font-semibold" style={{ color: 'var(--ui-text-muted)' }}>
+              {k}
+            </dt>
             <dd className="m-0">{v}</dd>
           </div>
         ))}
         {githubUrl ? (
-          <div className="grid grid-cols-[8rem_1fr] gap-2 border-b border-black/10 pb-2">
-            <dt className="m-0 font-semibold">GitHub</dt>
+          <div className="grid grid-cols-[8rem_1fr] gap-2 border-b pb-2" style={{ borderColor: 'var(--ui-border-soft)' }}>
+            <dt className="m-0 font-semibold" style={{ color: 'var(--ui-text-muted)' }}>
+              GitHub
+            </dt>
             <dd className="m-0">
               <a href={githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-start gap-2">
                 <span aria-hidden className="mt-[2px] inline-flex h-6 w-6 items-center justify-center">
                   <AppIconGlyph icon="fa:FaGithub" imgClassName="h-5 w-5 object-contain" textClassName="text-lg" />
                 </span>
-                <span className="break-all text-[#0b3d91] underline underline-offset-2">{githubUrl}</span>
+                <span className="break-all underline underline-offset-2" style={{ color: 'var(--ui-text)' }}>
+                  {githubUrl}
+                </span>
               </a>
             </dd>
           </div>
         ) : null}
       </dl>
       <div>
-        <p className="m-0 mb-2 text-lg font-semibold">Tech stack</p>
+        <p className="m-0 mb-2 text-[13px] font-semibold uppercase tracking-wide" style={{ color: 'var(--ui-text-muted)' }}>
+          Tech stack
+        </p>
         <SystemTechStackChips variant="xp" />
       </div>
       <NextStepLink

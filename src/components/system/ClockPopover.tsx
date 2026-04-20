@@ -11,15 +11,20 @@ export function ClockPopover({ dateLabel, timeLabel, id }: ClockPopoverProps) {
       role="dialog"
       aria-label="Clock"
       className={
-        'absolute bottom-full right-0 mb-2 w-[17rem] rounded-sm border-2 border-black/25 bg-xp-panel/95 p-3 font-retro text-retro-ink ' +
-        'shadow-[var(--ui-shadow-md)] backdrop-blur-[2px]'
+        'absolute bottom-full right-0 mb-2 w-[17rem] rounded-2xl border bg-[color:var(--ui-glass-strong)] p-3 font-retro ' +
+        'shadow-[var(--ui-shadow-md)] backdrop-blur-[16px]'
       }
+      style={{ borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)' }}
     >
       <div className="text-lg leading-tight">
         <div className="font-semibold">{timeLabel}</div>
-        <div className="text-base text-black/70">{dateLabel}</div>
+        <div className="text-base" style={{ color: 'var(--ui-text-muted)' }}>
+          {dateLabel}
+        </div>
       </div>
-      <div className="mt-2 text-base text-black/70">Time flies. So should your tabs.</div>
+      <div className="mt-2 text-base" style={{ color: 'var(--ui-text-muted)' }}>
+        Time flies. So should your tabs.
+      </div>
     </div>
   );
 }

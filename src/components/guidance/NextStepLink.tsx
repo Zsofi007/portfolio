@@ -12,9 +12,8 @@ type NextStepLinkProps = {
 };
 
 const xpBtn =
-  'mt-2 inline-flex w-full max-w-md items-center justify-center gap-2 border-2 border-black bg-xp-panel ' +
-  'cursor-pointer px-3 py-2 text-left font-retro text-lg text-retro-ink outline-none hover:bg-white ' +
-  'focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2';
+  'mt-2 inline-flex w-full max-w-md items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-left font-sans text-[13px] ' +
+  'font-semibold outline-none ui-pressable ui-cta cursor-pointer';
 
 const iosBtn =
   'mt-2 inline-flex w-full max-w-md items-center justify-center rounded-xl border border-black/[0.08] ' +
@@ -31,7 +30,12 @@ export function NextStepLink({
   if (!visible) return null;
   const ios = variant === 'ios';
   return (
-    <button type="button" className={ios ? iosBtn : xpBtn} aria-label={ariaLabel} onClick={onActivate}>
+    <button
+      type="button"
+      className={ios ? iosBtn : xpBtn}
+      aria-label={ariaLabel}
+      onClick={onActivate}
+    >
       {children}
     </button>
   );
