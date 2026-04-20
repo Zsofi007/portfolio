@@ -55,12 +55,6 @@ export function ResumeApp({ variant = 'xp', loadPreview = true }: ResumeAppProps
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-auto bg-white p-4 font-retro text-retro-ink">
-      <header className="shrink-0">
-        <h2 className="font-pixel m-0 text-[0.55rem] text-retro-titlebar-mid">Resume.pdf</h2>
-        <p className="mt-2 text-lg leading-snug">
-          Summary: senior frontend engineer · React · TypeScript · product-minded delivery.
-        </p>
-      </header>
       <section
         aria-label="Resume preview"
         className="flex min-h-0 flex-1 flex-col overflow-hidden rounded border-2 border-black/20 bg-zinc-100 shadow-inner"

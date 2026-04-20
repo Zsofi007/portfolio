@@ -41,7 +41,7 @@ export function FeaturedProject() {
         <div className="mt-3 flex items-center justify-end gap-2">
           <button
             type="button"
-            className="cursor-pointer border-2 border-black/30 bg-white px-3 py-1.5 font-retro text-lg text-retro-ink ui-pressable hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
+            className="cursor-pointer border-2 border-black bg-xp-teal px-3 py-1.5 font-retro text-lg text-white ui-pressable hover:bg-xp-teal-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
             onClick={() => openApp(featured.id)}
             aria-label={`Open featured project: ${featured.name}`}
           >
