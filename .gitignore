@@ -1,0 +1,12 @@
+node_modules
+.agents/
+.claude/
+.cursor/
+.claude-flow/
+.env
+
+# Source pack (subset copied to public/xp-icons); omit from git to save ~155MB
+Windows XP Icons/
+
+# Source pack (subset copied to public/ios-icons)
+retro-ios-app-icons-ICONS-wallpapers-clan-com/

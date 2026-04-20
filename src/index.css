@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-retro: 'VT323', ui-monospace, monospace;
+  --font-pixel: 'Press Start 2P', ui-monospace, cursive;
+  --color-xp-teal: #218221;
+  --color-xp-teal-dark: #1a6b1a;
+  --color-xp-sky: #1e4db8;
+  --color-xp-panel: #ece9d8;
+  --color-xp-title: #0a246a;
+  --color-retro-ink: #0c0c0c;
+  --color-retro-titlebar-mid: #245edc;
+  --color-retro-titlebar-deep: #093f9b;
+  --color-retro-taskbar-top: #ece9d8;
+  --color-retro-taskbar-mid: #d4d0c8;
+  --color-retro-close: #c75050;
+  --color-retro-close-hover: #e04a4a;
+  --color-retro-screen: #1a1033;
+  --color-retro-screen-mid: #2d1b4e;
+  --shadow-window: none;
+
+  /* Cohesive retro-modern tokens (desktop-first). */
+  --ease-ui: cubic-bezier(0.2, 0.9, 0.2, 1);
+  --dur-ui-fast: 120ms;
+  --dur-ui: 180ms;
+
+  --ui-border-soft: rgb(0 0 0 / 0.18);
+  --ui-border-hard: rgb(0 0 0 / 0.32);
+  --ui-focus: rgb(124 252 176 / 0.9);
+
+  --ui-shadow-sm: 0 2px 0 rgb(0 0 0 / 0.28);
+  --ui-shadow-md: 0 8px 24px rgb(0 0 0 / 0.32);
+  --ui-shadow-lg: 0 16px 44px rgb(0 0 0 / 0.42);
+
+  --ui-surface-panel: var(--color-xp-panel);
+  --ui-surface-veil: rgb(255 255 255 / 0.78);
+  --ui-surface-veil-strong: rgb(255 255 255 / 0.9);
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-retro);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Modernized interactive feel (retro-safe). */
+:where(button, [role='button']) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ui-pressable {
+  transition:
+    transform var(--dur-ui) var(--ease-ui),
+    box-shadow var(--dur-ui) var(--ease-ui),
+    filter var(--dur-ui-fast) var(--ease-ui),
+    background-color var(--dur-ui-fast) var(--ease-ui);
+}
+
+.ui-pressable:active {
+  transform: translate(1px, 1px);
+  filter: saturate(1.03);
+}
+
+.ui-focus-ring:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+/* Subtle spotlight for guided first visit (respect reduced motion). */
+.guided-desktop-icon-spotlight {
+  box-shadow: 0 0 0 2px rgb(36 94 220 / 0.45), 0 0 18px rgb(36 94 220 / 0.22);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .guided-desktop-icon-spotlight {
+    animation: guided-icon-spotlight-pulse 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes guided-icon-spotlight-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px rgb(36 94 220 / 0.35), 0 0 14px rgb(36 94 220 / 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgb(36 94 220 / 0.5), 0 0 22px rgb(36 94 220 / 0.28);
+  }
+}
+
+.guided-mobile-icon-spotlight {
+  box-shadow: 0 0 0 2px rgb(36 94 220 / 0.45), 0 0 18px rgb(36 94 220 / 0.22);
+  border-radius: 1rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .guided-mobile-icon-spotlight {
+    animation: guided-mobile-spotlight-pulse 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes guided-mobile-spotlight-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px rgb(36 94 220 / 0.35), 0 0 14px rgb(36 94 220 / 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgb(36 94 220 / 0.5), 0 0 22px rgb(36 94 220 / 0.28);
+  }
+}
+
