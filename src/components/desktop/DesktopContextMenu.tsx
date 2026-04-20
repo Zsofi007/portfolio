@@ -31,9 +31,7 @@ export function DesktopContextMenu() {
           if (t) openOrFocusFromApp(t);
         },
       },
-      { label: 'Refresh desktop', onSelect: () => pushToast('Desktop refreshed (demo).') },
       { label: 'Change wallpaper', onSelect: () => cycle() },
-      { label: 'Toggle UI sounds', onSelect: () => toggleSound() },
       { label: 'What is this?', onSelect: () => pushToast('A portfolio disguised as an operating system.') },
     ],
     [cycle, pushToast, toggleSound]

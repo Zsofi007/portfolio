@@ -19,7 +19,7 @@ export function ClockPopover({ dateLabel, timeLabel, id }: ClockPopoverProps) {
         <div className="font-semibold">{timeLabel}</div>
         <div className="text-base text-black/70">{dateLabel}</div>
       </div>
-      <div className="mt-2 text-base text-black/70">Time flies. So should your tabs.</div>
+      <div className="mt-2 text-base text-black/70">System clock. Surprisingly honest.</div>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
-export type WallpaperId = 'default' | 'midnight' | 'retro';
+export type WallpaperId = 'default' | 'midnight' | 'retro' | 'sunset' | 'aurora' | 'graphite';
 
 type WallpaperState = {
   id: WallpaperId;
   cycleWallpaper: () => void;
 };
 
-const ORDER: WallpaperId[] = ['default', 'midnight', 'retro'];
+const ORDER: WallpaperId[] = ['default', 'midnight', 'retro', 'sunset', 'aurora', 'graphite'];
 
 export const useWallpaperStore = create<WallpaperState>((set, get) => ({
   id: 'default',
