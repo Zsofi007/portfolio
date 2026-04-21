@@ -4,7 +4,7 @@ import type { AppChromeVariant } from '@/types/app-chrome';
 import { Suspense } from 'react';
 
 export const SYSTEM_TECH_GROUPS = [
-  { title: 'Frontend', tags: ['Angular', 'React', 'TypeScript', 'JavaScript', 'HTML/CSS', 'i18next'] },
+  { title: 'Frontend', tags: ['Angular', 'React', 'TypeScript', 'JavaScript', 'HTML/CSS', 'Vite', 'Framer Motion'] },
   { title: 'Backend', tags: ['Node.js', 'Express.js', 'Python', 'Flask'] },
   { title: 'Testing', tags: ['Playwright', 'Cypress', 'Jest'] },
   {
@@ -21,7 +21,7 @@ export const SYSTEM_TECH_GROUPS = [
   },
   {
     title: 'UI & Tooling',
-    tags: ['Vite', 'Zustand', 'Framer Motion', 'A11y', 'Design systems', 'Postman', 'Jira', 'Atlassian', 'Miro'],
+    tags: ['i18next', 'Zustand', 'A11y', 'Design systems', 'Postman', 'Jira', 'Atlassian', 'Miro'],
   },
 ] as const;
 
@@ -54,7 +54,7 @@ export function SystemTechStackChips({ variant }: SystemTechStackChipsProps) {
   const theme = variant === 'ios' ? 'systemIos' : 'systemXp';
   const ios = variant === 'ios';
   const sectionTitleClass = ios
-    ? 'm-0 mt-3 text-[12px] font-semibold uppercase tracking-wide text-black/45'
+    ? 'm-0 mt-3 text-[12px] font-semibold uppercase tracking-wide'
     : 'm-0 mt-3 text-base font-semibold text-black/70';
 
   return (
@@ -62,10 +62,18 @@ export function SystemTechStackChips({ variant }: SystemTechStackChipsProps) {
       <div aria-label="Technologies">
         {SYSTEM_TECH_GROUPS.map((g) => (
           <div key={g.title} className="first:mt-0">
-            <p className={sectionTitleClass}>{g.title}</p>
+            <p className={sectionTitleClass} style={ios ? { color: 'var(--ui-text-muted)' } : undefined}>
+              {g.title}
+            </p>
             <ul className="m-0 flex list-none flex-wrap gap-2 p-0" aria-label={`${g.title} technologies`}>
               {g.tags.map((t) => (
-                <ExpandableTechChip key={t} label={t} iconName={getTechStackIconName(t)} theme={theme} />
+                <ExpandableTechChip
+                  key={t}
+                  label={t}
+                  iconName={getTechStackIconName(t)}
+                  theme={theme}
+                  forceVariant="light"
+                />
               ))}
             </ul>
           </div>

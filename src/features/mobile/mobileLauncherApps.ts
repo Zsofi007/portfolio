@@ -1,11 +1,16 @@
 import { DESKTOP_GRID_APPS } from '@/features/desktop-system/desktopGridApps';
 import type { DesktopApp } from '@/types/desktop-app';
 
-/** Mobile home screen: same grid as desktop with Siri replacing Terminal. */
+/** Mobile home screen: same grid as desktop (excluding Siri + Minesweeper). */
 export function getMobileLauncherApps(): DesktopApp[] {
-  return DESKTOP_GRID_APPS.map((app) =>
-    app.id === 'terminal'
-      ? { id: 'siri', label: 'Siri', kind: 'siri', icon: '' }
-      : app,
-  );
+  const base = DESKTOP_GRID_APPS.filter((app) => app.id !== 'siri' && app.id !== 'minesweeper' && app.id !== 'terminal');
+  return [
+    ...base,
+    {
+      id: 'flappy',
+      label: 'Flappy',
+      kind: 'flappy',
+      icon: '/flappy-bird-icon.svg',
+    },
+  ];
 }

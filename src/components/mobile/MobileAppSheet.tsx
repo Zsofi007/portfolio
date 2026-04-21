@@ -75,16 +75,13 @@ export function MobileAppSheet({ app, onClose, onLock }: MobileAppSheetProps) {
       />
       <div
         className={
-          'relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-[1.25rem] ' +
-          'bg-[#f2f2f7] shadow-[0_-8px_40px_rgb(0_0_0/0.45)]'
+          'relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden rounded-none bg-[#f2f2f7] ' +
+          'shadow-[0_-8px_40px_rgb(0_0_0/0.45)]'
         }
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
       >
-        <div className="flex shrink-0 justify-center pb-1 pt-2" aria-hidden>
-          <span className="h-1 w-10 rounded-full bg-black/15" />
-        </div>
         <header className="relative flex shrink-0 items-center justify-between gap-2 border-b border-black/[0.06] bg-white/90 px-2 py-2 backdrop-blur-xl">
           <button
             ref={closeRef}
@@ -101,7 +98,7 @@ export function MobileAppSheet({ app, onClose, onLock }: MobileAppSheetProps) {
             id={titleId}
             className={
               'pointer-events-none absolute left-1/2 top-1/2 z-0 max-w-[calc(100%-10.5rem)] -translate-x-1/2 -translate-y-1/2 truncate ' +
-              'text-center text-[17px] font-semibold leading-none tracking-tight text-black'
+              'py-[1px] text-center text-[17px] font-semibold leading-[1.2] tracking-tight text-black'
             }
           >
             {active.label}
@@ -116,7 +113,7 @@ export function MobileAppSheet({ app, onClose, onLock }: MobileAppSheetProps) {
           </button>
         </header>
         <MobileSheetNavProvider value={navContextValue}>
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-[#f2f2f7]">
+          <div className="flex min-h-0 flex-1 flex-col overflow-auto bg-[#f2f2f7]">
             <WindowContentRouter appId={active.id} loadPreview={true} variant="ios" />
           </div>
         </MobileSheetNavProvider>

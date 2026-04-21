@@ -7,6 +7,7 @@ export type DesktopAppKind =
   | 'terminal'
   | 'siri'
   | 'minesweeper'
+  | 'flappy'
   | 'folder';
 
 export type DesktopApp = {

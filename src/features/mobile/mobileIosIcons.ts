@@ -12,8 +12,6 @@ const BY_APP_ID: Record<string, string> = {
   resume: '/ios-icons/books.png',
   contact: '/ios-icons/contacts.png',
   system: '/ios-icons/stocks.png',
-  'project-itinerai': '/ios-icons/app-store.png',
-  'project-saas-dashboard': '/ios-icons/podcasts.png',
 };
 
 export function getMobileIosAppIconSrc(appId: string): string | undefined {

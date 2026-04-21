@@ -1,6 +1,8 @@
 import { NextStepLink } from '@/components/guidance/NextStepLink';
+import { getDesktopAppById } from '@/features/desktop-system/desktopApps';
 import { openDesktopApp } from '@/features/guidance/openDesktopApp';
 import { useGuidancePrefsStore } from '@/features/guidance/guidancePrefsStore';
+import { useMobileSheetNav } from '@/features/mobile/mobileSheetNavContext';
 import type { AppChromeVariant } from '@/types/app-chrome';
 import type { Project } from '@/data/projects';
 
@@ -10,7 +12,15 @@ export function ProjectMetaPanel(props: ProjectMetaPanelProps) {
   const { variant = 'xp' } = props;
   const ios = variant === 'ios';
   const guided = useGuidancePrefsStore((s) => s.guidedMode);
-  const onContact = () => openDesktopApp('contact');
+  const sheetNav = useMobileSheetNav();
+  const onContact = () => {
+    if (sheetNav) {
+      const a = getDesktopAppById('contact');
+      if (a) sheetNav.pushChild(a);
+      return true;
+    }
+    return openDesktopApp('contact');
+  };
 
   if (ios) {
     return (

@@ -32,13 +32,13 @@ export function DesktopLandingView({ onEnter }: DesktopLandingViewProps) {
         transition={{ duration: 0.22 }}
         className="relative z-10 max-w-lg"
       >
-        <h1 className="font-pixel text-lg leading-snug text-[#7cfcb0] [text-shadow:2px_2px_0_#000]">
+        <h1 className="font-pixel text-lg leading-snug text-[color:var(--ui-focus)] [text-shadow:2px_2px_0_#000]">
           Welcome
         </h1>
-        <p className="font-retro mt-3 text-xl leading-snug text-[#9ae6ff] [text-shadow:1px_1px_0_#000]">
+        <p className="font-retro mt-3 text-xl leading-snug text-white/80 [text-shadow:1px_1px_0_rgb(0_0_0/0.9)]">
           This is {getLandingComputerTagline()}.
         </p>
-        <p className="font-retro mt-4 text-2xl leading-snug text-[#c8b8ff] [text-shadow:1px_1px_0_#000]">
+        <p className="font-retro mt-4 text-2xl leading-snug text-white/90 [text-shadow:1px_1px_0_rgb(0_0_0/0.9)]">
           Go ahead… snoop around.
         </p>
         <div className="font-retro mt-5 inline-flex flex-col items-center gap-1 rounded-sm border border-white/10 bg-black/20 px-4 py-2 text-left text-lg text-white/70">

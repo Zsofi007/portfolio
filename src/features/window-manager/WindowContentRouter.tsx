@@ -6,6 +6,7 @@ import { SiriApp } from '@/components/apps/siri/SiriApp';
 import { SystemInfoPanel } from '@/components/apps/system/SystemInfoPanel';
 import { TerminalApp } from '@/components/apps/terminal/TerminalApp';
 import { MinesweeperApp } from '@/components/apps/minesweeper/MinesweeperApp';
+import { FlappyApp } from '@/components/apps/flappy/FlappyApp';
 import { ProjectWindowBody } from '@/components/projects/ProjectWindowBody';
 import { getDesktopAppById } from '@/features/desktop-system/desktopApps';
 import { getProjectByAppId } from '@/features/projects';
@@ -74,6 +75,8 @@ export function WindowContentRouter({
       return <SiriApp />;
     case 'minesweeper':
       return <MinesweeperApp windowId={windowId} />;
+    case 'flappy':
+      return <FlappyApp />;
     case 'folder':
       return <FolderWindowBody folderAppId={app.id} childAppIds={app.childAppIds ?? []} variant={variant} />;
     default:

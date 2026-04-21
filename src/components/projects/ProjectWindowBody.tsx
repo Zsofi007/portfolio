@@ -13,6 +13,7 @@ type ProjectWindowBodyProps = {
 
 export function ProjectWindowBody({ project, loadPreview, variant = 'xp' }: ProjectWindowBodyProps) {
   const ios = variant === 'ios';
+  const TechBadges = ProjectIframeTechBadges as unknown as (props: { techStack: string[]; variant?: AppChromeVariant }) => any;
 
   return (
     <div className={`flex min-h-0 flex-1 flex-col overflow-hidden ${ios ? 'bg-white' : ''}`}>
@@ -24,7 +25,7 @@ export function ProjectWindowBody({ project, loadPreview, variant = 'xp' }: Proj
           loadEnabled={loadPreview}
           variant={variant}
         />
-        <ProjectIframeTechBadges techStack={project.techStack ?? []} />
+        <TechBadges techStack={project.techStack ?? []} variant={variant} />
         <IframeCornerActions repoUrl={project.repoUrl ?? 'https://github.com'} fullAppUrl={project.url} variant={variant} />
       </div>
     </div>

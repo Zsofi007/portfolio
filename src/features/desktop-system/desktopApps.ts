@@ -10,11 +10,19 @@ const SIRI_APP: DesktopApp = {
   icon: '',
 };
 
+const FLAPPY_APP: DesktopApp = {
+  id: 'flappy',
+  label: 'Flappy',
+  kind: 'flappy',
+  icon: '/flappy-bird-icon.svg',
+};
+
 const byId: Record<string, DesktopApp> = {};
 for (const a of [...CORE_SYSTEM_APPS, ...PROJECT_DESKTOP_APPS, ...ICON_ROW_APPS]) {
   if (!byId[a.id]) byId[a.id] = a;
 }
 byId.siri = SIRI_APP;
+byId.flappy = FLAPPY_APP;
 
 export function getDesktopAppById(id: string): DesktopApp | undefined {
   return byId[id];

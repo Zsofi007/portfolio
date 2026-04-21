@@ -13,7 +13,7 @@ type MobileIconTileProps = {
 };
 
 const weightRing: Record<MobileIconVisualWeight, string> = {
-  primary: 'shadow-[0_4px_18px_rgb(0_0_0/0.35)]',
+  primary: '',
   secondary: 'opacity-90',
   default: '',
 };
@@ -50,7 +50,9 @@ export function MobileIconTile({
       aria-label={ariaLabel}
       className={
         'flex flex-col items-center gap-1 rounded-2xl p-2 outline-none transition active:scale-95 ' +
-        'hover:bg-white/15 hover:backdrop-blur-sm focus-visible:bg-white/15 focus-visible:backdrop-blur-sm ' +
+        (spotlight
+          ? 'hover:bg-transparent focus-visible:bg-transparent '
+          : 'hover:bg-white/15 hover:backdrop-blur-sm focus-visible:bg-white/15 focus-visible:backdrop-blur-sm ') +
         'focus-visible:ring-2 focus-visible:ring-white/80 ' +
         weightRing[visualWeight] +
         (spotlight ? ' guided-mobile-icon-spotlight' : '')

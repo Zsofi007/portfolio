@@ -2,8 +2,10 @@ import { NextStepLink } from '@/components/guidance/NextStepLink';
 import { SystemTechStackChips } from '@/components/apps/system/SystemTechStackChips';
 import { AppIconGlyph } from '@/components/icons/AppIconGlyph';
 import { getDeveloperName } from '@/config/developerIdentity';
+import { getDesktopAppById } from '@/features/desktop-system/desktopApps';
 import { openDesktopApp } from '@/features/guidance/openDesktopApp';
 import { useGuidancePrefsStore } from '@/features/guidance/guidancePrefsStore';
+import { useMobileSheetNav } from '@/features/mobile/mobileSheetNavContext';
 import type { AppChromeVariant } from '@/types/app-chrome';
 
 type SystemInfoPanelProps = { variant?: AppChromeVariant };
@@ -17,7 +19,15 @@ function getGithubPortfolioUrl(): string {
 export function SystemInfoPanel({ variant = 'xp' }: SystemInfoPanelProps) {
   const ios = variant === 'ios';
   const guided = useGuidancePrefsStore((s) => s.guidedMode);
-  const openProjects = () => openDesktopApp('folder-projects');
+  const sheetNav = useMobileSheetNav();
+  const openProjects = () => {
+    if (sheetNav) {
+      const a = getDesktopAppById('folder-projects');
+      if (a) sheetNav.pushChild(a);
+      return true;
+    }
+    return openDesktopApp('folder-projects');
+  };
   const name = getDeveloperName() || 'Unknown user';
   const githubUrl = getGithubPortfolioUrl();
 
@@ -33,9 +43,17 @@ export function SystemInfoPanel({ variant = 'xp' }: SystemInfoPanelProps) {
 
   if (ios) {
     return (
-      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto bg-white p-4 font-sans text-black">
-        <h2 className="m-0 text-lg font-semibold">About this device</h2>
-        <dl className="m-0 space-y-0 overflow-hidden rounded-2xl border border-black/[0.08] bg-zinc-50">
+      <div
+        className="flex min-h-0 flex-1 flex-col gap-4 p-4 font-sans"
+        style={{ background: 'var(--ui-glass)', color: 'var(--ui-text)' }}
+      >
+        <h2 className="m-0 text-lg font-semibold" style={{ color: 'var(--ui-text)' }}>
+          About this device
+        </h2>
+        <dl
+          className="m-0 space-y-0 rounded-2xl border bg-[color:var(--ui-glass-strong)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[14px]"
+          style={{ borderColor: 'var(--ui-border-soft)' }}
+        >
           {LINES.map(({ k, v }, i) => (
             <div
               key={k}
@@ -43,27 +61,41 @@ export function SystemInfoPanel({ variant = 'xp' }: SystemInfoPanelProps) {
                 'grid grid-cols-[7.5rem_1fr] gap-2 px-4 py-3 text-[15px] ' +
                 (i > 0 ? 'border-t border-black/[0.06]' : '')
               }
+              style={i > 0 ? { borderTopColor: 'var(--ui-border-soft)' } : undefined}
             >
-              <dt className="m-0 font-medium text-black/45">{k}</dt>
-              <dd className="m-0 text-black/85">{v}</dd>
+              <dt className="m-0 font-medium" style={{ color: 'var(--ui-text-muted)' }}>
+                {k}
+              </dt>
+              <dd className="m-0" style={{ color: 'var(--ui-text)' }}>
+                {v}
+              </dd>
             </div>
           ))}
           {githubUrl ? (
-            <div className={'grid grid-cols-[7.5rem_1fr] gap-2 px-4 py-3 text-[15px] border-t border-black/[0.06]'}>
-              <dt className="m-0 font-medium text-black/45">GitHub</dt>
+            <div
+              className={'grid grid-cols-[7.5rem_1fr] gap-2 px-4 py-3 text-[15px] border-t'}
+              style={{ borderTopColor: 'var(--ui-border-soft)' }}
+            >
+              <dt className="m-0 font-medium" style={{ color: 'var(--ui-text-muted)' }}>
+                GitHub
+              </dt>
               <dd className="m-0">
                 <a href={githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-start gap-2">
                   <span aria-hidden className="mt-[2px] inline-flex h-5 w-5 items-center justify-center">
                     <AppIconGlyph icon="fa:FaGithub" imgClassName="h-4 w-4 object-contain" textClassName="text-sm" />
                   </span>
-                  <span className="break-all text-[#007aff] underline underline-offset-2">{githubUrl}</span>
+                  <span className="break-all underline underline-offset-2" style={{ color: 'var(--ui-text)' }}>
+                    {githubUrl}
+                  </span>
                 </a>
               </dd>
             </div>
           ) : null}
         </dl>
         <div>
-          <p className="m-0 mb-2 text-[13px] font-semibold uppercase tracking-wide text-black/45">Tech stack</p>
+          <p className="m-0 mb-2 text-[13px] font-semibold uppercase tracking-wide" style={{ color: 'var(--ui-text-muted)' }}>
+            Tech stack
+          </p>
           <SystemTechStackChips variant="ios" />
         </div>
         <NextStepLink

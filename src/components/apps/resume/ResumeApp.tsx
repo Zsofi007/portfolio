@@ -27,12 +27,6 @@ export function ResumeApp({ variant = 'xp', loadPreview = true }: ResumeAppProps
   if (ios) {
     return (
       <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto bg-white p-4 font-sans text-black">
-        <header className="shrink-0">
-          <h2 className="m-0 text-lg font-semibold">Resume.pdf</h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-black/65">
-            Summary: senior frontend engineer · React · TypeScript · product-minded delivery.
-          </p>
-        </header>
         <section
           aria-label="Resume preview"
           className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-black/[0.08] bg-zinc-100 shadow-inner"

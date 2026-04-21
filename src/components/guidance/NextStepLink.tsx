@@ -17,8 +17,9 @@ const xpBtn =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-black';
 
 const iosBtn =
-  'mt-2 inline-flex w-full max-w-md items-center justify-center rounded-xl border border-black/[0.08] ' +
-  'cursor-pointer bg-zinc-50 px-4 py-3 text-left text-[15px] font-medium text-black outline-none hover:bg-zinc-100 ' +
+  'mt-2 inline-flex w-full max-w-md items-center justify-center rounded-xl border border-[#007aff]/30 ' +
+  'cursor-pointer bg-[#007aff] px-4 py-3 text-left text-[15px] font-semibold text-white outline-none ' +
+  'shadow-[0_0_18px_rgb(0_122_255/0.25)] hover:bg-[#0066d6] hover:shadow-[0_0_22px_rgb(0_122_255/0.32)] ' +
   'focus-visible:ring-2 focus-visible:ring-[#007aff]';
 
 export function NextStepLink({

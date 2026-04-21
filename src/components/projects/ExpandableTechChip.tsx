@@ -10,6 +10,8 @@ type ExpandableTechChipProps = {
   label: string;
   iconName?: IconName;
   theme: ExpandableTechChipTheme;
+  /** Override icon variant regardless of current theme. */
+  forceVariant?: 'light' | 'dark';
 };
 
 const themes: Record<
@@ -18,15 +20,16 @@ const themes: Record<
 > = {
   iframe: {
     btn:
-      'h-9 min-h-9 min-w-9 max-w-9 rounded border border-black/25 bg-xp-panel/95 text-retro-ink shadow-sm backdrop-blur-sm ' +
+      'h-9 min-h-9 min-w-9 max-w-9 rounded-md border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[10px] ' +
       'md:hover:max-w-[min(220px,42vw)] md:hover:gap-2 md:hover:px-2 md:hover:shadow-md ' +
       'md:focus-within:max-w-[min(220px,42vw)] md:focus-within:gap-2 md:focus-within:px-2 md:focus-within:shadow-md',
     btnTextOnly:
-      'h-9 min-h-9 min-w-9 max-w-9 rounded border border-black/25 bg-xp-panel/95 text-retro-ink shadow-sm backdrop-blur-sm',
-    label: 'font-pixel text-[0.45rem] leading-tight text-retro-ink',
-    iconBox: 'flex h-7 w-7 shrink-0 items-center justify-center',
-    fallback: 'font-pixel max-w-[2.2rem] truncate text-center text-[0.35rem] leading-tight text-retro-titlebar-mid',
-    iconClass: 'h-5 w-5 shrink-0',
+      'h-9 min-h-9 min-w-9 max-w-9 rounded-md border bg-[color:var(--ui-glass)] shadow-[var(--ui-shadow-sm)] backdrop-blur-[10px]',
+    label: 'font-sans text-[12px] font-medium leading-tight',
+    iconBox:
+      'flex h-7 w-7 shrink-0 items-center justify-center rounded-md border bg-[color:var(--ui-glass-strong)] shadow-[0_1px_0_rgb(255_255_255/0.06)]',
+    fallback: 'font-sans max-w-[2.2rem] truncate text-center text-[10px] font-semibold leading-tight',
+    iconClass: 'h-5 w-5 shrink-0 drop-shadow-[0_1px_1px_rgb(0_0_0/0.22)]',
   },
   systemXp: {
     btn:
@@ -53,19 +56,46 @@ const themes: Record<
   },
 };
 
-export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChipProps) {
+export function ExpandableTechChip({ label, iconName, theme, forceVariant }: ExpandableTechChipProps) {
   const t = themes[theme];
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [open, setOpen] = useState(false);
   const expandedMobile = isMobile && open;
+  const [resolved, setResolved] = useState<'light' | 'dark'>(() => {
+    const v = typeof document !== 'undefined' ? document.documentElement.dataset.theme : undefined;
+    if (v === 'dark' || v === 'light') return v;
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  });
 
   useEffect(() => {
     if (!isMobile) setOpen(false);
   }, [isMobile]);
 
+  useEffect(() => {
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    const read = () => {
+      const v = document.documentElement.dataset.theme;
+      if (v === 'dark' || v === 'light') return v;
+      return mq?.matches ? 'dark' : 'light';
+    };
+    setResolved(read());
+
+    const onMq = () => setResolved(read());
+    mq?.addEventListener?.('change', onMq);
+
+    const mo = new MutationObserver(() => setResolved(read()));
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    return () => {
+      mq?.removeEventListener?.('change', onMq);
+      mo.disconnect();
+    };
+  }, []);
+
   const ring =
     theme === 'iframe'
-      ? 'focus-visible:ring-black'
+      ? 'focus-visible:ring-[color:var(--ui-focus)]'
       : theme === 'systemIos'
         ? 'focus-visible:ring-[#007aff]'
         : 'focus-visible:ring-retro-titlebar-mid';
@@ -101,6 +131,9 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
           t.btn +
           (expandedMobile ? ' max-md:max-w-[min(260px,85vw)] max-md:justify-start max-md:gap-2 max-md:px-2.5' : '')
         }
+        style={
+          theme === 'iframe' ? { borderColor: 'var(--ui-border-soft)', color: 'var(--ui-text)', outlineColor: 'var(--ui-focus)' } : undefined
+        }
         aria-expanded={isMobile ? open : undefined}
         aria-label={label}
         onClick={() => {
@@ -109,7 +142,12 @@ export function ExpandableTechChip({ label, iconName, theme }: ExpandableTechChi
         }}
       >
         <span className={t.iconBox}>
-          <StackIcon name={iconName} variant="light" className={t.iconClass} aria-hidden />
+          <StackIcon
+            name={iconName}
+            variant={forceVariant ?? (resolved === 'dark' ? 'dark' : 'light')}
+            className={t.iconClass}
+            aria-hidden
+          />
         </span>
         <span
           className={
