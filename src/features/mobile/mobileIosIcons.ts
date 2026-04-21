@@ -8,10 +8,14 @@ const BY_APP_ID: Record<string, string> = {
   'folder-projects': '/ios-icons/safari.png',
   /** Same “Search for people” asset as desktop XP (`public/xp-icons/search-for-people.png`). */
   'folder-system': '/xp-icons/search-for-people.png',
-  about: '/ios-icons/notes-app.png',
+  about: '/ios-icons/question.svg',
   resume: '/ios-icons/books.png',
   contact: '/ios-icons/contacts.png',
   system: '/ios-icons/stocks.png',
+  messages: '/ios-icons/messages.png',
+  notes: '/ios-icons/notes.png',
+  stats: '/ios-icons/stats.png',
+  music: '/ios-icons/music.png',
 };
 
 export function getMobileIosAppIconSrc(appId: string): string | undefined {

@@ -13,6 +13,7 @@ import { mobileIconVisualWeight } from '@/features/mobile/mobileIconVisualWeight
 import { useLongPress } from '@/hooks/useLongPress';
 import type { DesktopApp } from '@/types/desktop-app';
 import { useMobileNotificationStore } from '@/store/mobileNotificationStore';
+import { useMobileUsageStore } from '@/store/mobileUsageStore';
 import { useWallpaperStore } from '@/store/wallpaperStore';
 import { useEffect, useState } from 'react';
 
@@ -29,12 +30,23 @@ export function MobileShell({ onLock }: MobileShellProps) {
   const cycleWallpaper = useWallpaperStore((s) => s.cycleWallpaper);
   const guidedMode = useGuidancePrefsStore((s) => s.guidedMode);
   const spotlightAppId = useGuidancePrefsStore((s) => s.spotlightAppId);
+  const startSession = useMobileUsageStore((s) => s.startSession);
+  const resetSession = useMobileUsageStore((s) => s.resetSession);
+  const recordOpen = useMobileUsageStore((s) => s.recordOpen);
+  const firstMessagesNudgeShown = useMobileUsageStore((s) => s.firstMessagesNudgeShown);
+  const firstStatsNudgeShown = useMobileUsageStore((s) => s.firstStatsNudgeShown);
+  const markMessagesNudgeShown = useMobileUsageStore((s) => s.markMessagesNudgeShown);
+  const markStatsNudgeShown = useMobileUsageStore((s) => s.markStatsNudgeShown);
 
   useMobileGuidanceBoot();
 
   useEffect(() => {
     seed();
   }, [seed]);
+
+  useEffect(() => {
+    startSession();
+  }, [startSession]);
 
   useEffect(() => {
     if (!openApp?.id) return;
@@ -63,6 +75,7 @@ export function MobileShell({ onLock }: MobileShellProps) {
   const lock = () => {
     setOpenApp(null);
     setNotificationsOpen(false);
+    resetSession();
     onLock();
   };
 
@@ -100,6 +113,23 @@ export function MobileShell({ onLock }: MobileShellProps) {
                   onOpen={() => {
                     setNotificationsOpen(false);
                     maybePushFirstLaunchHint();
+                    recordOpen(app.id);
+                    if (app.id === 'messages' && !firstMessagesNudgeShown) {
+                      addNote({
+                        id: `messages-nudge-${Date.now()}`,
+                        title: 'Messages',
+                        body: 'You might want to check the recruiter chat…',
+                      });
+                      markMessagesNudgeShown();
+                    }
+                    if (app.id === 'stats' && !firstStatsNudgeShown) {
+                      addNote({
+                        id: `stats-nudge-${Date.now()}`,
+                        title: 'Stats',
+                        body: "We’ve been tracking you 👀",
+                      });
+                      markStatsNudgeShown();
+                    }
                     setOpenApp(app);
                   }}
                 />

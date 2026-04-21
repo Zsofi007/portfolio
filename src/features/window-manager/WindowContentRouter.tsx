@@ -7,6 +7,10 @@ import { SystemInfoPanel } from '@/components/apps/system/SystemInfoPanel';
 import { TerminalApp } from '@/components/apps/terminal/TerminalApp';
 import { MinesweeperApp } from '@/components/apps/minesweeper/MinesweeperApp';
 import { FlappyApp } from '@/components/apps/flappy/FlappyApp';
+import { MessagesApp } from '@/components/apps/messages/MessagesApp';
+import { NotesApp } from '@/components/apps/notes/NotesApp';
+import { UsageStatsApp } from '@/components/apps/stats/UsageStatsApp';
+import { MusicApp } from '@/components/apps/music/MusicApp';
 import { ProjectWindowBody } from '@/components/projects/ProjectWindowBody';
 import { getDesktopAppById } from '@/features/desktop-system/desktopApps';
 import { getProjectByAppId } from '@/features/projects';
@@ -77,6 +81,14 @@ export function WindowContentRouter({
       return <MinesweeperApp windowId={windowId} />;
     case 'flappy':
       return <FlappyApp />;
+    case 'messages':
+      return <MessagesApp />;
+    case 'notes':
+      return <NotesApp />;
+    case 'stats':
+      return <UsageStatsApp />;
+    case 'music':
+      return <MusicApp />;
     case 'folder':
       return <FolderWindowBody folderAppId={app.id} childAppIds={app.childAppIds ?? []} variant={variant} />;
     default:
